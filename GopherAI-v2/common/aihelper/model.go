@@ -36,13 +36,13 @@ type OpenAIModel struct {
 
 func NewOpenAIModel(ctx context.Context) (*OpenAIModel, error) {
 	key := os.Getenv("OPENAI_API_KEY")
-	modelName := os.Getenv("OPENAI_MODEL_NAME")
 	baseURL := os.Getenv("OPENAI_BASE_URL")
+	modelName := os.Getenv("OPENAI_MODEL_NAME")
 
 	llm, err := openai.NewChatModel(ctx, &openai.ChatModelConfig{
+		APIKey:  key,
 		BaseURL: baseURL,
 		Model:   modelName,
-		APIKey:  key,
 	})
 	if err != nil {
 		return nil, fmt.Errorf("create openai model failed: %v", err)
